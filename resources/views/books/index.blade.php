@@ -1,19 +1,22 @@
-@extends('layouts.app')
+<h1>Library System</h1>
 
-@section('title', 'Daftar Buku')
+<p>
+    <a href="/books">Books</a> | 
+    <a href="/categories">Categories</a> | 
+    <a href="/members">Members</a>
+</p>
 
-@section('content')
-    <h2>Daftar Buku</h2>
+<hr>
 
-    @if($stock > 0)
-        <p>Status Stok: <strong>Buku Tersedia</strong></p>
-    @else
-        <p>Status Stok: <strong>Buku Sedang Habis</strong></p>
-    @endif
+<h2>Daftar Buku</h2>
+<p>Daftar buku yang tersedia di perpustakaan.</p>
 
-    <ul>
-        @foreach($books as $book)
-            <li>{{ $book['title'] }} - {{ $book['author'] }} ({{ $book['year'] }})</li>
-        @endforeach
-    </ul>
-@endsection
+@foreach($books as $book)
+    <h3>{{ $book->title }}</h3>
+    <p>Penulis: {{ $book->author }}</p>
+    <p>Tahun: {{ $book->year }}</p>
+    <p>Stok: {{ $book->stock }}</p>
+    <hr>
+@endforeach
+
+<footer>Library System</footer>
