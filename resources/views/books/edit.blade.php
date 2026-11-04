@@ -1,70 +1,50 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Buku')
+@section('title', $title)
 
-@section('content')
-<form action="{{ route('books.update', $book) }}" method="POST">
-    @csrf
-    @method('PUT')
+@section('content') 
+    <form action="{{ route('books.update', $book) }}" method="POST">
+        @csrf
+        @method('PUT')
 
-    <div>
-        <label>Judul Buku</label>
-        <input 
-            type="text" 
-            name="title" 
-            placeholder="Judul buku"
-            value="{{ old('title') }}"
-        >
+        <div>
+            <label>Judul Buku</label>
+            <input type="text" name="title" placeholder="Judul Buku" value="{{ old('title', $book->title) }}">
+
+            @error('title')
+                <p>{{$message}}</p>
+            @enderror
+
+        </div>
         
-        @error('title')
-            <p>{{ $message }}</p>
-        @enderror
-    </div>
+        <div>
+            <label>Penulis Buku</label>
+            <input type="text" name="author" placeholder="Penulis" value="{{ old('author', $book->author) }}">
 
-    <div>
-        <label>Penulis Buku</label>
-        <input 
-            type="text" 
-            name="author" 
-            placeholder="Penulis Buku"
-            value="{{ old('author') }}"
-        >
-        
-        @error('author')
-            <p>{{ $message }}</p>
-        @enderror
-    </div>
+            @error('author')
+                <p>{{$message}}</p>
+            @enderror
+        </div>
 
-    <div>
-        <label>Tahun Terbit</label>
-        <input 
-            type="number" 
-            name="year" 
-            placeholder="Tahun Terbit"
-            value="{{ old('year') }}"
-        >
-        
-        @error('year')
-            <p>{{ $message }}</p>
-        @enderror
-    </div>
+        <div>
+            <label>Tahun Terbit</label>
+            <input type="number" name="year" placeholder="Tahun Terbit" value="{{ old('year', $book->year) }}">
 
-    
-    <div>
-        <label>Stok Buku</label>
-        <input 
-            type="number" 
-            name="stock" 
-            placeholder="Stok Buku"
-            value="{{ old('stock') }}"
-        >
-        
-        @error('stock')
-            <p>{{ $message }}</p>
-        @enderror
-    </div>
+            @error('year')
+                <p>{{$message}}</p>
+            @enderror
+        </div>
 
-     <div>
+        <div>
+            <label>Stok Buku</label>
+            <input type="number" name="stock" placeholder="Stok Buku" value="{{ old('stock', $book->stock) }}">
+
+            @error('stock')
+                <p>{{$message}}</p>
+            @enderror
+        </div>
+
+         <div>
             <label>Kategori Buku</label>
             <select name="category_id">
                 <option value="">Pilih Kategori</option>
@@ -82,10 +62,10 @@
             @error('category_id')
                 <p>{{ $message }}</p>
             @enderror
-    </div>
+        </div>
 
-    <button type="submit">
-        Update
-    </button>
-</form>
+        <button type="submit">
+            Update
+        </button>
+    </form>
 @endsection

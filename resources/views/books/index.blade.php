@@ -4,7 +4,7 @@
 
 @section('content')
     @if (session('success'))
-        <p>{{ session('success') }}</p>
+        <p style="color: green;">{{ session('success') }}</p>
     @endif
 
     <a href="{{ route('books.create') }}">Tambah Buku</a>
@@ -15,7 +15,6 @@
             <a href="{{ route('books.show', $book) }}">Detail Buku</a>
             <a href="{{ route('books.edit', $book) }}">Edit Buku</a>
             
-            {{-- TAMBAHKAN onsubmit DI TAG FORM DI BAZAWAN INI --}}
             <form action="{{ route('books.destroy', $book) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus buku {{ $book->title }}?');">
                 @csrf
                 @method('DELETE')
